@@ -1,0 +1,41 @@
+<form action = "/guardar" method = "post">
+    <label for = "nombre">Nombre:</label>
+    <input name = "nombre" id = "nombre">
+    <label for = "apellido">Apellido:</label>
+    <input name = "apellido" id = "apellido">
+    <button type = "submit">Guardar</button>
+</form>
+<hr>
+<form>
+    <fieldset>
+        <legend>Modalidad</legend>
+        <label for = "presencial">
+            <input type = "radio" value = "presencial" name = "modalidad"> 
+            Presencial
+        </label>
+        <label for = "virtual">
+            <input type = "radio" value = "virtual" name = "modalidad"> 
+            Virtual
+        </label>
+    </fieldset>
+<label for = "turno">Seleccione el turno:</label>
+    <select name = "turno" id = "turno">
+        <option value = "A">A</option>
+        <option value = "B">B</option>
+        <option value = "C">C</option>
+    </select>
+
+<br>
+<label for = "comentario">Comentario:</label>
+    <textarea name = "comentario" id = "comentario"></textarea>
+
+<br>
+<button type = "button">Vista previa</button>
+<br>
+<button type = "reset">Limpiar formulario</button>
+<br>
+<button type = "submit">Guardar</button>
+
+</form>
+
+
