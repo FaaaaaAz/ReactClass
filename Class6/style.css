@@ -1,0 +1,9 @@
+#principal {
+    background-color: lightblue;
+}
+p {
+    background-color: yellow;
+}
+h1, p {
+    background-color: gray;
+}
