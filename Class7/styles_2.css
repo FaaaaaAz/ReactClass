@@ -1,0 +1,16 @@
+html{
+    font-size: 10px;
+}
+body {
+    background-color: red;
+}
+.contenedor {
+    background-color: green;
+    width: 300px;
+    height: 300px;
+    padding: 30px;
+    border: 10px solid yellow;
+    margin: 50px;
+    border-radius: 20px;
+    font-size: 2rem;
+}
