@@ -1,0 +1,18 @@
+.mensaje {
+    color: rgb(0, 0, 0);
+    background-color: rgb(139, 226, 238);
+
+    font-family: system-ui, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+
+    height: 100px;
+}
+
+.mensaje:hover {
+    background-color: #FF0000;
+}
+
+input:focus {
+    background-color: gray;
+}

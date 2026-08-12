@@ -1,0 +1,12 @@
+.tablero td {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid gray;
+    text-align: center;
+    color: transparent
+}
+
+.tablero td:hover {
+    color: rgb(1, 56, 238);
+    background-color: rgb(246, 252, 199);
+}
