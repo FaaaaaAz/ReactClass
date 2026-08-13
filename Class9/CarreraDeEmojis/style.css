@@ -1,0 +1,53 @@
+.etiqueta {
+    background-color: orange;
+    padding: 0.5rem;
+    top: 0.5rem;
+    left: 0.5rem;
+    position: absolute;
+}
+
+.tarjeta {
+    width: 16rem;
+    padding: 1rem;
+    background-color: lightblue;
+    border: 1px solid blue;
+    position: relative;
+    top: 5rem;
+}
+
+.referencia {
+    width: 12rem;
+    padding: 1rem;
+    border: 2px solid black;
+    left: 2rem;
+    position: relative;
+    background-color: #F4F7FB;
+    top: 5rem;
+}
+
+.normal {
+    width: 12rem;
+    padding: 1rem;
+    background-color: gray;
+    border: 2px solid black;
+    position: static;
+}
+
+.pista {
+    width: 24rem;
+    border: 2px solid #243447;
+}
+
+.corredor {
+    border-bottom: 1px dashed #B8C2CC;
+    padding: 0.5rem;
+    background-color: #F4F7FB;
+    height: 3rem;
+    font-size: 1.5rem;
+    transition: background-color 0.2s, padding-left 0.8s;
+}
+
+.corredor:hover {
+    padding-left: 1.5rem;
+    background-color: #ecdc01;
+}
