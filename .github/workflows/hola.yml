@@ -11,3 +11,5 @@ jobs:
         run: echo "Hola mundo"
       - name: Descargar codigo
         uses: actions/checkout@v4
+      - name: En que carpeta estoy
+        run: pwd
