@@ -17,3 +17,5 @@ jobs:
         run: ls -la
       - name: Instalar Node
         uses: actions/setup-node@v4
+      - name: verificar version de node
+        run: node -v
