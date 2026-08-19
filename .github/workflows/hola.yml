@@ -13,3 +13,7 @@ jobs:
         uses: actions/checkout@v4
       - name: En que carpeta estoy
         run: pwd
+      - name: Listar archivos
+        run: ls -la
+      - name: Instalar Node
+        uses: actions/setup-node@v4
