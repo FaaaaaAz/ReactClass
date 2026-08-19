@@ -10,4 +10,4 @@ jobs:
       - name: Saludar
         run: echo "Hola mundo"
       - name: Descargar codigo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
