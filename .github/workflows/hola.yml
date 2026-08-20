@@ -21,5 +21,7 @@ jobs:
         run: node -v
       - name: verificar version de npm
         run: npm -v
+      - name: Instalar dependencias
+        run: npm install
       - name: Check JS
         run: npm run check:js
