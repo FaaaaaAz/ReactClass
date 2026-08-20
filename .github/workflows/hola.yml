@@ -3,25 +3,37 @@ name: Hola Mundo
 on:
   push:
   workflow_dispatch:
+
 jobs:
   hola:
     runs-on: ubuntu-latest
+
     steps:
       - name: Saludar
         run: echo "Hola mundo"
+
       - name: Descargar codigo
         uses: actions/checkout@v4
+
       - name: En que carpeta estoy
         run: pwd
+
       - name: Listar archivos
         run: ls -la
+
       - name: Instalar Node
         uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: verificar version de node
         run: node -v
+
       - name: verificar version de npm
         run: npm -v
+
       - name: Instalar dependencias
-        run: npm install
+        run: npm ci
+
       - name: Check JS
         run: npm run check:js
