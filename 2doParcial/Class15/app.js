@@ -1,0 +1,10 @@
+"use strict";
+let intentos = 3;
+let mensaje = "Hola, desde la UPB";
+let activo = true;
+console.log(intentos);
+console.log(mensaje);
+console.log(activo);
+const numero = 5;
+console.log(numero = 5);
+console.log(numero === 5);
