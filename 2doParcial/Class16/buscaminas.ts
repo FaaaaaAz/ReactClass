@@ -1,6 +1,6 @@
 console.log("Esto es un Buscaminas.");
 
-let tabla:HTMLTableElement = document.querySelector<HTMLTableElement>("table");
+let tabla = document.querySelector<HTMLTableElement>("table");
 
 if(tabla) {
     console.log(tabla.tagName);
