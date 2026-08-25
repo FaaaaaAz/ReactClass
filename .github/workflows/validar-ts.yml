@@ -1,0 +1,24 @@
+name: Validador TypeScript
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  validar-ts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar TypeScript
+        run: npm install -g typescript
+
+      - name: Validar buscaminas.ts
+        run: tsc --noEmit 2doParcial/Class16/buscaminas.ts
