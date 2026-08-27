@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import TresEnRaya from './tresEnRaya';
+import './style.css';
 
 const contenedor = document.querySelector('#root');
 
