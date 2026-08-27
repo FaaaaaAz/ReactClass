@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: tres-en-raya
+        working-directory: 2doParcial/Class17/tres-en-raya
 
     steps:
       - name: Descargar codigo
@@ -26,3 +26,9 @@ jobs:
 
       - name: Construir proyecto con Vite
         run: npm run build
+
+      - name: Guardar ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: aplicacion-web
+          path: 2doParcial/Class17/tres-en-raya/dist
