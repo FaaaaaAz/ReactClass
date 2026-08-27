@@ -19,9 +19,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: tres-en-raya/package-lock.json
+          node-version: 22
 
       - name: Instalar dependencias
         run: npm ci
