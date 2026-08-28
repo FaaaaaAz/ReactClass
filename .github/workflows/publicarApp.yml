@@ -40,8 +40,8 @@ jobs:
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Subir artefacto para Pages
-        uses: actions/upload-pages-artifact@v5
+      - name: Subir dist
+        uses: actions/upload-pages-artifact@v4
         with:
           path: 2doParcial/Class18/contador/dist
 
