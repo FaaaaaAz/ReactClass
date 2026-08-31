@@ -31,7 +31,11 @@ return (
             {tablero
                 .slice(fila * 3, fila * 3 + 3)
                 .map((celda, columna) => (
-                <td key={columna}></td>
+                <td key={columna}>
+                    <button onClick={() => marcarCelda(fila * 3 + columna)}>
+                    {celda}
+                    </button>
+                </td>
                 ))}
             </tr>
         );
