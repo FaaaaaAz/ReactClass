@@ -1,0 +1,33 @@
+# Revisa la calidad del codigo del juego antes de publicarlo:
+# ESLint y la compilacion de TypeScript (npm run build ejecuta tsc -b).
+name: Validar Serpiente
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 2doParcial/ExamenParcial/Serpiente
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Revisar el codigo con ESLint
+        run: npm run lint
+
+      - name: Compilar TypeScript y construir con Vite
+        run: npm run build

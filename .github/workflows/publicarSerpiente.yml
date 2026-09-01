@@ -1,10 +1,10 @@
-# Publicaba el contador de la Class18 en GitHub Pages.
-# GitHub Pages publica un unico sitio por repositorio, y ese sitio ahora lo
-# publica publicarSerpiente.yml (Examen Parcial). Para que los dos workflows no
-# se pisen, este quedo solo en modo manual (workflow_dispatch).
-name: Publicar app
+# Publica el juego de la serpiente (Examen Parcial) en GitHub Pages.
+# El sitio queda en: https://faaaaaaz.github.io/ReactClass/
+name: Publicar Serpiente
 
 on:
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: 2doParcial/Class18/contador
+        working-directory: 2doParcial/ExamenParcial/Serpiente
 
     steps:
       - name: Descargar codigo
@@ -45,7 +45,7 @@ jobs:
       - name: Subir dist
         uses: actions/upload-pages-artifact@v4
         with:
-          path: 2doParcial/Class18/contador/dist
+          path: 2doParcial/ExamenParcial/Serpiente/dist
 
   deploy:
     environment:

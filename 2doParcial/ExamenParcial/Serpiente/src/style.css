@@ -1,0 +1,97 @@
+body {
+    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+    margin: 0;
+    padding: 2rem 1rem;
+}
+
+/* Contenedor del juego: recibe el foco para escuchar el teclado */
+.juego {
+    max-width: 30rem;
+    margin: 0 auto;
+    text-align: center;
+    outline: none;
+}
+
+h1 {
+    margin: 0 0 0.5rem;
+}
+
+.ayuda {
+    color: #555;
+    font-size: 0.95rem;
+    margin: 0 0 1rem;
+}
+
+/* Tablero de 8 filas por 8 columnas */
+.tablero {
+    border-collapse: collapse;
+    margin: 0 auto;
+    border: 4px solid #333;
+    background: #fff;
+}
+
+/* Señal visual cuando el juego termina por un choque */
+.tablero-choque {
+    border-color: #d32f2f;
+}
+
+/* Marca el tablero cuando tiene el foco y responde a las flechas */
+.juego:focus-within .tablero {
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.35);
+}
+
+.celda {
+    width: 2.4rem;
+    height: 2.4rem;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0;
+}
+
+.celda-vacia {
+    background: #fff;
+}
+
+/* La cabeza se distingue del cuerpo por el color y por el emoji */
+.celda-cabeza {
+    background: #1b5e20;
+}
+
+.celda-cuerpo {
+    background: #81c784;
+}
+
+.celda-comida {
+    background: #fff8e1;
+}
+
+.mensaje {
+    font-size: 1.05rem;
+    margin: 1rem 0;
+}
+
+.mensaje-perdido {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.mensaje-ganado {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+button {
+    font: inherit;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid #333;
+    border-radius: 0.4rem;
+    background: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #eee;
+}
