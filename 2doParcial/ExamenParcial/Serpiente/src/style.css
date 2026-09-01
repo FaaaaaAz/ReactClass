@@ -6,7 +6,6 @@ body {
     padding: 2rem 1rem;
 }
 
-/* Contenedor del juego: recibe el foco para escuchar el teclado */
 .juego {
     max-width: 30rem;
     margin: 0 auto;
@@ -24,7 +23,6 @@ h1 {
     margin: 0 0 1rem;
 }
 
-/* Tablero de 8 filas por 8 columnas */
 .tablero {
     border-collapse: collapse;
     margin: 0 auto;
@@ -32,12 +30,10 @@ h1 {
     background: #fff;
 }
 
-/* Señal visual cuando el juego termina por un choque */
 .tablero-choque {
     border-color: #d32f2f;
 }
 
-/* Marca el tablero cuando tiene el foco y responde a las flechas */
 .juego:focus-within .tablero {
     box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.35);
 }
@@ -55,7 +51,6 @@ h1 {
     background: #fff;
 }
 
-/* La cabeza se distingue del cuerpo por el color y por el emoji */
 .celda-cabeza {
     background: #1b5e20;
 }

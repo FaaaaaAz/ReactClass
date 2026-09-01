@@ -89,25 +89,10 @@ const [resultado, setResultado] = useState<Resultado>('jugando');
 ```
 
 La serpiente es una lista de posiciones donde **el primer elemento es la
-cabeza**. Cuando se presiona una flecha, `mover` hace lo siguiente:
-
-1. Si la partida ya terminó, no hace nada.
-2. Calcula la nueva cabeza sumando el avance a la posición de la cabeza actual.
-3. Si la nueva cabeza queda fuera del tablero, el resultado pasa a `perdido`.
-4. Revisa si la nueva cabeza cae sobre la comida.
-5. Arma el cuerpo que sobrevive: si comió se conserva completo, si no comió se
-   elimina el último segmento con `slice`. Por eso el cuerpo *sigue* a la cabeza.
-6. Si la nueva cabeza choca con ese cuerpo, el resultado pasa a `perdido`.
-7. Guarda la nueva serpiente con `[nuevaCabeza].concat(cuerpo)`.
-8. Si comió, genera la siguiente comida en una celda libre.
-
-El orden de los pasos 5 y 6 importa: la cola se retira **antes** de revisar el
-choque, así que entrar en la celda que la cola acaba de dejar es un movimiento
-válido, tal como ocurre en el juego original.
+cabeza**. 
 
 ## 6. Calidad del código
 
-Decisiones tomadas para que el código sea correcto y fácil de leer:
 
 - **Tipado explícito.** `Posicion` describe una celda, y dos tipos de unión
   describen los estados posibles: `Contenido` (cabeza, cuerpo, comida o vacía) y
@@ -149,16 +134,4 @@ repositorio:
 | `publicarSerpiente.yml` | En cada push a `main` instala dependencias, construye con Vite y publica `dist/` en GitHub Pages. |
 | `validarSerpiente.yml` | En cada push revisa el código con ESLint y compila TypeScript. |
 
-El workflow de publicación trabaja dentro de esta carpeta gracias a
-`defaults.run.working-directory`, y sube
-`2doParcial/ExamenParcial/Serpiente/dist` como artefacto de Pages.
 
-Como el sitio no se publica en la raíz del dominio sino dentro del repositorio,
-`vite.config.ts` incluye:
-
-```ts
-base: '/ReactClass/',
-```
-
-Sin esa línea el navegador buscaría los archivos en
-`https://faaaaaaz.github.io/assets/...` y la página aparecería en blanco.

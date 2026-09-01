@@ -9,7 +9,7 @@ interface TableroProps {
 }
 
 export default function Tablero({ serpiente, comida, perdido }: TableroProps) {
-    // Señal visual: el borde externo se pone rojo cuando hay choque
+
     const clase: string = perdido ? 'tablero tablero-choque' : 'tablero';
 
     return (

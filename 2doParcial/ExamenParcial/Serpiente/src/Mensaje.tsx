@@ -5,7 +5,6 @@ interface MensajeProps {
     comidas: number;
 }
 
-// Renderizado condicional: el mensaje cambia segun como va la partida
 export default function Mensaje({ resultado, comidas }: MensajeProps) {
     if (resultado === 'perdido') {
         return (

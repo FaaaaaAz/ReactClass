@@ -4,7 +4,6 @@ interface CeldaProps {
     contenido: Contenido;
 }
 
-// La cabeza y la comida ademas del color llevan un emoji
 const obtenerTexto = (contenido: Contenido): string => {
     if (contenido === 'cabeza') {
         return '🐍';

@@ -14,15 +14,12 @@ import Tablero from './Tablero';
 import Mensaje from './Mensaje';
 
 export default function Serpiente() {
-    // Estado: la serpiente (lista de segmentos), la comida y el resultado
     const [serpiente, setSerpiente] = useState<Posicion[]>(serpienteInicial);
     const [comida, setComida] = useState<Posicion>(comidaInicial);
     const [resultado, setResultado] = useState<Resultado>('jugando');
 
-    // Cuantas comidas se alcanzaron: la serpiente empezo con 3 segmentos
     const comidas: number = serpiente.length - serpienteInicial.length;
 
-    // Un turno: la cabeza avanza una celda en la direccion indicada
     const mover = (avanceFila: number, avanceColumna: number): void => {
         if (resultado !== 'jugando') {
             return;
@@ -34,7 +31,6 @@ export default function Serpiente() {
             columna: cabeza.columna + avanceColumna,
         };
 
-        // Choque contra el borde: el juego termina
         if (estaFueraDelTablero(nuevaCabeza)) {
             setResultado('perdido');
             return;
@@ -42,12 +38,10 @@ export default function Serpiente() {
 
         const come: boolean = sonIguales(nuevaCabeza, comida);
 
-        // El cuerpo sigue a la cabeza. Si no come, se elimina el ultimo segmento.
         const cuerpo: Posicion[] = come
             ? serpiente
             : serpiente.slice(0, serpiente.length - 1);
 
-        // Choque con el propio cuerpo: el juego termina
         if (estaOcupada(cuerpo, nuevaCabeza)) {
             setResultado('perdido');
             return;
@@ -57,7 +51,6 @@ export default function Serpiente() {
         setSerpiente(nuevaSerpiente);
 
         if (come) {
-            // Al comer, la serpiente ya crecio: falta poner la siguiente comida
             if (nuevaSerpiente.length === totalCeldas) {
                 setResultado('ganado');
             } else {
@@ -66,7 +59,6 @@ export default function Serpiente() {
         }
     };
 
-    // Cada pulsacion de una flecha representa un turno
     const manejarTecla = (evento: KeyboardEvent<HTMLDivElement>): void => {
         if (evento.key === 'ArrowUp') {
             mover(-1, 0);
@@ -88,7 +80,6 @@ export default function Serpiente() {
         setResultado('jugando');
     };
 
-    // tabIndex permite que el div reciba el foco y por tanto las teclas
     return (
         <div className="juego" tabIndex={0} onKeyDown={manejarTecla}>
             <h1>Serpiente</h1>
