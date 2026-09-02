@@ -1,0 +1,15 @@
+.contenedor {
+    min-height: 100vh;
+    background-color: #0f172a;
+    color: #f8fafc;
+    display: flex;
+    justify-content: center;
+}
+
+.base-jugador {
+    width: 25rem;
+    height: 5rem;
+    background-color: #2563eb;
+    position: absolute;
+    bottom: 0px;
+}
