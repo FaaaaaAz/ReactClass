@@ -8,6 +8,10 @@ body {
     position: relative;
     min-height: 100vh;
     background-color: #0f172a;
+    background-image: url('./assets/fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #f8fafc;
     display: flex;
     justify-content: center;
@@ -15,9 +19,9 @@ body {
 }
 
 .base-jugador {
-    width: 14vw;
-    height: 6vh;
-    background-color: #2563eb;
+    width: 10vw;
+    height: 9vh;
     position: absolute;
     bottom: 0px;
+    object-fit: contain;
 }

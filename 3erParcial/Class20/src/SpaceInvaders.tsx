@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import naveImg from "./assets/nave.png";
+import alienImg from "./assets/alien.png";
+import piedraImg from "./assets/piedra.png";
 
 type Bloque = {
     x: number
     y: number
 }
 
-const PROPORCION_BLOQUE = 0.07 // 7% del alto del área de juego: todo más chico, para dar tiempo a reaccionar
-const PROPORCION_PROYECTIL = PROPORCION_BLOQUE / 2 // el disparo es más pequeño que un extraterrestre
+const PROPORCION_BLOQUE = 0.07
+const PROPORCION_DISPARO = PROPORCION_BLOQUE / 2
 const NUMERO_EXTRATERRESTRES = 5
-const PROPORCION_PASO_BASE = 0.03 // 3% del ancho del área de juego por cada tecla de movimiento
+const PROPORCION_PASO_BASE = 0.03
 
 function obtenerAnchoJuego() {
     const contenedor = document.getElementById('root')
@@ -33,8 +36,8 @@ function obtenerTamanoBloque(alto: number) {
     return alto * PROPORCION_BLOQUE
 }
 
-function obtenerTamanoProyectil(alto: number) {
-    return alto * PROPORCION_PROYECTIL
+function obtenerTamanoDisparo(alto: number) {
+    return alto * PROPORCION_DISPARO
 }
 
 function crearFilaDeExtraterrestres(ancho: number, alto: number): Array<Bloque> {
@@ -57,16 +60,14 @@ function SpaceInvaders() {
         () => (obtenerAnchoJuego() - obtenerAnchoBase()) / 2
     )
 
-    const [proyectiles, setProyectiles] = useState<Array<Bloque>>([])
+    const [disparos, setDisparos] = useState<Array<Bloque>>([])
 
     const [extraterrestres, setExtraterrestres] = useState<Array<Bloque>>(
         () => crearFilaDeExtraterrestres(obtenerAnchoJuego(), obtenerAltoJuego())
     )
 
-    // tamaño de Extraterrestre, en proporción al área de juego (no un px fijo)
     const tamanoBloque = obtenerTamanoBloque(altoJuego)
-    // el proyectil es más chico que un extraterrestre
-    const tamanoProyectil = obtenerTamanoProyectil(altoJuego)
+    const tamanoDisparo = obtenerTamanoDisparo(altoJuego)
 
     useEffect(() => {
         const actualizarDimensiones = () => {
@@ -101,11 +102,10 @@ function SpaceInvaders() {
         }
     }, []);
 
-    // controles: flecha izquierda/derecha mueven la Base, flecha arriba dispara desde la Base
     useEffect(() => {
         const pasoBase = anchoJuego * PROPORCION_PASO_BASE
 
-        const manejarTecla = (evento: KeyboardEvent) => {
+        const escucharTecla = (evento: KeyboardEvent) => {
             if (evento.key === 'ArrowLeft') {
                 evento.preventDefault()
                 setPosicionBase((anterior) => Math.max(anterior - pasoBase, 0))
@@ -118,56 +118,56 @@ function SpaceInvaders() {
                 return
             }
 
-            if (evento.key === 'ArrowUp' && !evento.repeat) {
+            if (evento.code === 'Space' && !evento.repeat) {
                 evento.preventDefault()
-                setProyectiles((anteriores) => [
-                    ...anteriores,
-                    { x: posicionBase + anchoBase / 2 - tamanoProyectil / 2, y: altoBase }
+
+                setDisparos((disparosAnteriores) => [
+                    ...disparosAnteriores,
+                    { x: posicionBase + anchoBase / 2 - tamanoDisparo / 2, y: altoBase }
                 ])
             }
         }
 
-        window.addEventListener('keydown', manejarTecla)
+        window.addEventListener('keydown', escucharTecla)
 
         return () => {
-            window.removeEventListener('keydown', manejarTecla)
+            window.removeEventListener('keydown', escucharTecla)
         }
-    }, [anchoJuego, anchoBase, altoBase, tamanoProyectil, posicionBase])
+    }, [anchoJuego, anchoBase, altoBase, tamanoDisparo, posicionBase])
 
-    // movimiento de los proyectiles: suben cada segundo y desaparecen al salir de la pantalla
     useEffect(() => {
-        const pasoProyectil = obtenerTamanoBloque(altoJuego)
-        const alturaMaximaProyectil = altoJuego - tamanoProyectil
+        const pasoDisparo = obtenerTamanoBloque(altoJuego)
+        const alturaMaximaDisparo = altoJuego - tamanoDisparo
 
         const identificadorIntervalo: number = setInterval(() => {
-            setProyectiles((anteriores) =>
-                anteriores
-                    .map((proyectil) => ({ ...proyectil, y: proyectil.y + pasoProyectil }))
-                    .filter((proyectil) => proyectil.y < alturaMaximaProyectil)
+            setDisparos((disparosAnteriores) =>
+                disparosAnteriores
+                    .map((disparo) => ({ ...disparo, y: disparo.y + pasoDisparo }))
+                    .filter((disparo) => disparo.y < alturaMaximaDisparo)
             )
         }, 1000)
 
         return () => {
             clearInterval(identificadorIntervalo)
         }
-    }, [altoJuego, tamanoProyectil])
+    }, [altoJuego, tamanoDisparo])
 
     useEffect(() => {
-        const pasoAlien = obtenerTamanoBloque(altoJuego)
-        const alturaMaximaAlien = altoJuego - altoBase - pasoAlien
+        const tamanoBloqueActual = obtenerTamanoBloque(altoJuego)
+        const alturaMaximaAlien = altoJuego - altoBase - tamanoBloqueActual
 
         const identificadorIntervalo: number = setInterval(() => {
-            setExtraterrestres((anteriores) =>
-                anteriores.map((bloque) => {
-                    // formula del profesor: cada tick se mueve -1, 0 o 1 bloque al azar
-                    const pasoAleatorio = (Math.floor(Math.random() * 3) - 1) * pasoAlien
-                    const siguienteX = Math.min(Math.max(bloque.x + pasoAleatorio, 0), anchoJuego - pasoAlien)
-                    const siguienteY = bloque.y + pasoAlien
+            setExtraterrestres((bloquesAnteriores) => {
+                const bloquesActualizados = bloquesAnteriores.map((bloque) => {
+                    const pasoHorizontal = (Math.floor(Math.random() * 3) - 1) * tamanoBloqueActual
+                    const siguienteX = Math.min(Math.max(bloque.x + pasoHorizontal, 0), anchoJuego - tamanoBloqueActual)
+                    const siguienteY = bloque.y + tamanoBloqueActual
 
-                    // si llega a la altura de la base, vuelve a nacer arriba
-                    return { ...bloque, x: siguienteX, y: siguienteY >= alturaMaximaAlien ? 0 : siguienteY }
+                    return { x: siguienteX, y: siguienteY >= alturaMaximaAlien ? 0 : siguienteY }
                 })
-            )
+
+                return bloquesActualizados
+            })
         }, 1000)
 
         return () => {
@@ -175,30 +175,29 @@ function SpaceInvaders() {
         }
     }, [altoJuego, altoBase, anchoJuego])
 
-    // deteccion de colision: si un proyectil alcanza a un extraterrestre, este muere
     useEffect(() => {
-        if (proyectiles.length === 0) {
+        if (disparos.length === 0) {
             return
         }
 
         const extraterrestresImpactados = new Set<number>()
-        const proyectilesUsados = new Set<number>()
+        const disparosUsados = new Set<number>()
 
         extraterrestres.forEach((alien, indiceAlien) => {
             const alienYDesdeAbajo = altoJuego - alien.y - tamanoBloque
 
-            proyectiles.forEach((proyectil, indiceProyectil) => {
-                if (proyectilesUsados.has(indiceProyectil)) {
+            disparos.forEach((disparo, indiceDisparo) => {
+                if (disparosUsados.has(indiceDisparo)) {
                     return
                 }
 
                 const impacto =
-                    Math.abs(alien.x - proyectil.x) < tamanoBloque &&
-                    Math.abs(alienYDesdeAbajo - proyectil.y) < tamanoBloque
+                    Math.abs(alien.x - disparo.x) < tamanoBloque &&
+                    Math.abs(alienYDesdeAbajo - disparo.y) < tamanoBloque
 
                 if (impacto) {
                     extraterrestresImpactados.add(indiceAlien)
-                    proyectilesUsados.add(indiceProyectil)
+                    disparosUsados.add(indiceDisparo)
                 }
             })
         })
@@ -207,42 +206,52 @@ function SpaceInvaders() {
             return
         }
 
-        // el extraterrestre impactado muere: se elimina de la lista
         setExtraterrestres((anteriores) =>
             anteriores.filter((_, indice) => !extraterrestresImpactados.has(indice))
         )
 
-        setProyectiles((anteriores) =>
-            anteriores.filter((_, indice) => !proyectilesUsados.has(indice))
+        setDisparos((disparosAnteriores) =>
+            disparosAnteriores.filter((_, indice) => !disparosUsados.has(indice))
         )
-    }, [proyectiles, extraterrestres, altoJuego, tamanoBloque])
+    }, [disparos, extraterrestres, altoJuego, tamanoBloque])
+
+    // si se elimina toda la oleada, nace una nueva despues de una pequeña pausa
+    useEffect(() => {
+        if (extraterrestres.length > 0) {
+            return
+        }
+
+        const identificadorEspera = setTimeout(() => {
+            setExtraterrestres(crearFilaDeExtraterrestres(anchoJuego, altoJuego))
+        }, 1500)
+
+        return () => {
+            clearTimeout(identificadorEspera)
+        }
+    }, [extraterrestres.length, anchoJuego, altoJuego])
 
     return (
         <>
-            <div className="base-jugador" style={{ left: `${posicionBase}px` }}>
-                Base
-            </div>
-            {proyectiles.map((proyectil, indice) => (
-                <div key={indice} style={{
+            <img src={naveImg} alt="Base" className="base-jugador" style={{ left: `${posicionBase}px` }} />
+            {disparos.map((disparo, indice) => (
+                <img key={indice} src={piedraImg} alt="Disparo" style={{
                     position: 'absolute',
-                    width: `${tamanoProyectil}px`,
-                    height: `${tamanoProyectil}px`,
-                    left: `${proyectil.x}px`,
-                    bottom: `${proyectil.y}px`,
-                    background: '#22c55e'
+                    width: `${tamanoDisparo}px`,
+                    height: `${tamanoDisparo}px`,
+                    left: `${disparo.x}px`,
+                    bottom: `${disparo.y}px`,
+                    objectFit: 'contain'
                 }} />
             ))}
             {extraterrestres.map((bloque, indice) => (
-                <div key={indice} style={{
+                <img key={indice} src={alienImg} alt="Extraterrestre" style={{
                     position: 'absolute',
                     width: `${tamanoBloque}px`,
                     height: `${tamanoBloque}px`,
                     left: `${bloque.x}px`,
                     top: `${bloque.y}px`,
-                    background: '#ef4444'
-                }}>
-                    Extraterrestre
-                </div>
+                    objectFit: 'contain'
+                }} />
             ))}
         </>
     );
