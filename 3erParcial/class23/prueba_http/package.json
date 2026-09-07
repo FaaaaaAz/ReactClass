@@ -1,5 +1,5 @@
 {
-  "name": "space-invaders",
+  "name": "prueba_http",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,8 +7,6 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "test": "node --experimental-strip-types --test tests/engine.test.mjs",
-    "test:browser": "node tests/browser.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
