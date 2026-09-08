@@ -1,4 +1,4 @@
-.game-app { min-height: 100svh; position: relative; isolation: isolate; padding: 0 clamp(20px, 5.2vw, 88px); display: flex; flex-direction: column; }
+.game-app { min-height: 100svh; position: relative; isolation: isolate; overflow-x: clip; padding: 0 clamp(20px, 5.2vw, 88px); display: flex; flex-direction: column; }
 .game-app::before { content: ''; position: fixed; inset: 0; z-index: -2; background: linear-gradient(110deg, #090e1466, #070b1015 60%, #060a1030), url('./assets/fondoOscuro.png') center / cover no-repeat; }
 .game-app::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: -1; background: radial-gradient(ellipse at 73% 37%, #6692870e, transparent 45%); }
 .app-header { width: 100%; max-width: 1440px; margin: 0 auto; height: 98px; flex-shrink: 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
