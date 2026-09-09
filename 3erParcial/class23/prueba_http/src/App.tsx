@@ -1,14 +1,7 @@
-import ListaPublicaciones from "./ListaPublicaciones";
-import Saludo from "./Saludo";
-import "./App.css";
+import TresEnRaya from "./TresEnRaya";
 
 function App() {
-  return (
-    <div>
-      <Saludo />
-      <ListaPublicaciones />
-    </div>
-  );
+  return <TresEnRaya />;
 }
 
 export default App;
